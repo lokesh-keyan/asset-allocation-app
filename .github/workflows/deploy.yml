@@ -35,15 +35,14 @@ jobs:
       run: |
         source .venv/bin/activate
         python -m unittest  # Running the tests using pytest
-
-    # Deploy to Azure Web App
+        
     - name: Azure login using Service Principal
       run: |
-        az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az login --service-principal --username ${{ secrets.AZURE_APP_ID }} --password ${{ secrets.AZURE_PASSWORD }} --tenant ${{ secrets.AZURE_TENANT_ID }}
     
     - name: Deploy FastAPI app to Azure
       run: |
-        az webapp up --name <app-name> --resource-group <resource-group> --plan ASP-myassetallocationapp-a55b --runtime "PYTHON|3.8" --sku F1
+        az webapp up --name ${{ secrets.AZURE_WEBAPP_NAME }} --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --runtime "PYTHON|3.8" --sku F1
 
     # Optionally, you can use `uvicorn` to run the app directly or make sure it’s running on Azure
     - name: Start Uvicorn server
