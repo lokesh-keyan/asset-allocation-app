@@ -43,9 +43,3 @@ jobs:
     - name: Deploy FastAPI app to Azure
       run: |
         az webapp up --name ${{ secrets.AZURE_WEBAPP_NAME }} --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --runtime "PYTHON|3.8" --sku F1
-
-    # Optionally, you can use `uvicorn` to run the app directly or make sure it’s running on Azure
-    - name: Start Uvicorn server
-      run: |
-        source .venv/bin/activate
-        uvicorn app.myapp:app --host 0.0.0.0 --port 80 --workers 4  # Ensure your app is accessible on Azure
