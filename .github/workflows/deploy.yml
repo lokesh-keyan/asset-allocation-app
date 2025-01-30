@@ -34,7 +34,7 @@ jobs:
     - name: Run unit tests
       run: |
         source .venv/bin/activate
-        pytest  # Running the tests using pytest
+        python -m unittest  # Running the tests using pytest
 
     # Deploy to Azure Web App
     - name: Azure login using Service Principal
